@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   packages: write
   pull-requests: read
@@ -76,3 +77,4 @@ jobs:
       OPENCLAW_CLAUDE_SETTINGS_LOCAL_JSON: ${{ secrets.OPENCLAW_CLAUDE_SETTINGS_LOCAL_JSON }}
       OPENCLAW_GEMINI_SETTINGS_JSON: ${{ secrets.OPENCLAW_GEMINI_SETTINGS_JSON }}
       FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+ }}
