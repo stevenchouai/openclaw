@@ -52,7 +52,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const raw = fs.readFileSync(process.argv[1], "utf8") || "[]";
 const parsed = JSON.parse(raw);
-const last = Array.isArray(parsed) ? parsed.at(-1) : null;
+const last = Array.isArray(parsed) ? parsed.at(-1) : parsed;
 const filename = typeof last?.filename === "string" ? last.filename.trim() : "";
 if (
   !filename.endsWith(".tgz") ||
@@ -159,7 +159,7 @@ resolve_package_tgz() {
   pack_json_file="$PACK_DIR/pack.json"
 
   echo "==> Pack OpenClaw tarball"
-  npm pack --ignore-scripts --json --pack-destination "$PACK_DIR" >"$pack_json_file"
+  PNPM_CONFIG_IGNORE_SCRIPTS=true pnpm pack --json --pack-destination "$PACK_DIR" >"$pack_json_file"
   PACKAGE_TGZ="$(resolve_pack_tarball_path "$pack_json_file" "$PACK_DIR")"
   if [ -z "$PACKAGE_TGZ" ] || [ ! -f "$PACKAGE_TGZ" ]; then
     echo "missing packed OpenClaw tarball" >&2
